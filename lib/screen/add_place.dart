@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:native_feature_app/providers/user_places.dart';
+import 'package:native_feature_app/widgets/image_input.dart';
 
 class AddPlaceScren extends ConsumerStatefulWidget {
   const AddPlaceScren({super.key});
@@ -28,7 +29,6 @@ class _AddPlaceScrenState extends ConsumerState<AddPlaceScren> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _titleController.dispose();
     super.dispose();
   }
@@ -50,6 +50,10 @@ class _AddPlaceScrenState extends ConsumerState<AddPlaceScren> {
                 ),
                 controller: _titleController,
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              const ImageInput(),
               const SizedBox(
                 height: 20,
               ),
