@@ -20,6 +20,7 @@ class PlaceListWidget extends StatelessWidget {
         return noPlaces;
       }
       return ListView.builder(
+        padding: const EdgeInsets.all(12),
         itemCount: places.length,
         itemBuilder: (ctx, index) => ListTile(
           onTap: () {
@@ -29,6 +30,10 @@ class PlaceListWidget extends StatelessWidget {
               ),
             );
           },
+          leading: CircleAvatar(
+            radius: 26,
+            backgroundImage: FileImage(places[index].image),
+          ),
           title: Text(
             places[index].title,
           ),
