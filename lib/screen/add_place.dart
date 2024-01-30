@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:native_feature_app/providers/user_places.dart';
 
-class AddPlaceScren extends StatefulWidget {
+class AddPlaceScren extends ConsumerStatefulWidget {
   const AddPlaceScren({super.key});
 
   @override
-  State<AddPlaceScren> createState() => _AddPlaceScrenState();
+  ConsumerState<AddPlaceScren> createState() => _AddPlaceScrenState();
 }
 
-class _AddPlaceScrenState extends State<AddPlaceScren> {
+class _AddPlaceScrenState extends ConsumerState<AddPlaceScren> {
   final _titleController = TextEditingController();
+
+  void _savePlace() {
+    final enteredTitle = _titleController.text;
+    if (enteredTitle.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Invalid input"),
+        ),
+      );
+      return;
+    }
+    ref.read(userPlacesProvider.notifier).addPlace(enteredTitle);
+    Navigator.of(context).pop();
+  }
 
   @override
   void dispose() {
@@ -39,7 +55,10 @@ class _AddPlaceScrenState extends State<AddPlaceScren> {
               ),
               ElevatedButton.icon(
                 icon: const Icon(Icons.add),
-                onPressed: () {},
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  _savePlace();
+                },
                 label: const Text("Save Place"),
               )
             ],
