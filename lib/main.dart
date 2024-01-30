@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
-
-final colorScheme = ColorScheme.fromSeed(
-  brightness: Brightness.dark,
-  seedColor: const Color.fromARGB(255, 102, 5, 247),
-  background: const Color.fromARGB(255, 56, 49, 66),
-);
-
-final theme = ThemeData().copyWith(
-  scaffoldBackgroundColor: colorScheme.background,
-);
+import 'package:native_feature_app/screen/place_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,16 +8,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          colorScheme: ColorScheme.fromSeed(
+        brightness: Brightness.dark,
+        seedColor: const Color.fromARGB(255, 102, 6, 247),
+      )),
+      home: const PlacesListScreen(),
     );
   }
 }
