@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:native_feature_app/model/place.dart';
 import 'package:native_feature_app/providers/user_places.dart';
 import 'package:native_feature_app/widgets/image_input.dart';
 import 'dart:io';
@@ -16,10 +17,13 @@ class AddPlaceScren extends ConsumerStatefulWidget {
 class _AddPlaceScrenState extends ConsumerState<AddPlaceScren> {
   File? _selectedImage;
   final _titleController = TextEditingController();
+  PlaceLocation? _selectedLocation;
 
   void _savePlace() {
     final enteredTitle = _titleController.text;
-    if (enteredTitle.isEmpty || _selectedImage == null) {
+    if (enteredTitle.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("You must add an image and also a valid input"),
@@ -29,7 +33,7 @@ class _AddPlaceScrenState extends ConsumerState<AddPlaceScren> {
     }
     ref
         .read(userPlacesProvider.notifier)
-        .addPlace(enteredTitle, _selectedImage!);
+        .addPlace(enteredTitle, _selectedImage!, _selectedLocation!);
     Navigator.of(context).pop();
   }
 
@@ -70,7 +74,11 @@ class _AddPlaceScrenState extends ConsumerState<AddPlaceScren> {
               const SizedBox(
                 height: 20,
               ),
-              const LocationInput(),
+              LocationInput(
+                onSelectedLocation: (location) {
+                  _selectedLocation = location;
+                },
+              ),
               ElevatedButton.icon(
                 icon: const Icon(Icons.add),
                 onPressed: () {

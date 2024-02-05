@@ -6,7 +6,9 @@ import "package:http/http.dart" as http;
 import 'package:native_feature_app/model/place.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  const LocationInput({super.key, required this.onSelectedLocation});
+
+  final void Function(PlaceLocation lcation) onSelectedLocation;
 
   @override
   State<LocationInput> createState() => _LocationInputState();
@@ -79,6 +81,7 @@ class _LocationInputState extends State<LocationInput> {
       );
       _isGettingLocation = false;
     });
+    widget.onSelectedLocation(_pickLocation!);
   }
 
   @override

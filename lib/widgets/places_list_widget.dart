@@ -26,10 +26,13 @@ class PlaceListWidget extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (contex) => PlaceDetailScreen(place: places[index]),
+                builder: (contex) => PlaceDetailScreen(
+                  place: places[index],
+                ),
               ),
             );
           },
+          subtitle: Text(places[index].location.address),
           leading: CircleAvatar(
             radius: 26,
             backgroundImage: FileImage(places[index].image),
