@@ -24,6 +24,9 @@ class _AddPlaceScrenState extends ConsumerState<AddPlaceScren> {
     if (enteredTitle.isEmpty ||
         _selectedImage == null ||
         _selectedLocation == null) {
+      print(_selectedImage);
+      print(_selectedLocation);
+      print(enteredTitle);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("You must add an image and also a valid input"),
